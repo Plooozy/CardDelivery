@@ -1,3 +1,4 @@
+import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 
@@ -15,12 +16,12 @@ public class CareDeliveryTest {
         open("http://localhost:9999/");
         $("[data-test-id=city] input").setValue("Ростов-на-Дону");
         String date = LocalDate.now().plusDays(14).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id=date] input").doubleClick().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
+        $("[data-test-id=date] input").sendKeys(Keys.CONTROL + "A", Keys.DELETE);
         $("[data-test-id=date] input").setValue(date);
         $("[data-test-id=name] input").setValue("Иван Иванов");
         $("[data-test-id=phone] input").setValue("+37376589312");
         $("[data-test-id=agreement]").click();
         $(".button").click();
-        $(".notification__title").shouldBe(visible, Duration.ofSeconds(15));
+        $(".notification__title").shouldBe(visible, Duration.ofSeconds(15)).shouldHave(Condition.exactText("Успешно!"));
     }
 }
