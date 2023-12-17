@@ -23,5 +23,6 @@ public class CareDeliveryTest {
         $("[data-test-id=agreement]").click();
         $(".button").click();
         $(".notification__title").shouldBe(visible, Duration.ofSeconds(15)).shouldHave(Condition.exactText("Успешно!"));
+        $(".notification__content").shouldBe(visible, Duration.ofSeconds(15)).shouldHave(Condition.exactText("Встреча успешно забронирована на " + date));
     }
 }
